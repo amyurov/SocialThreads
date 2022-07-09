@@ -9,20 +9,16 @@ public class Main {
         ExecutorService threadPool = Executors.newFixedThreadPool(4);
 
         // Создаем Callable потоки
-        CallableSocialThread thread1 = new CallableSocialThread("Поток-1");
-        CallableSocialThread thread2 = new CallableSocialThread("Поток-2");
-        CallableSocialThread thread3 = new CallableSocialThread("Поток-3");
-        CallableSocialThread thread4 = new CallableSocialThread("Поток-4");
-
         List<CallableSocialThread> threadsList = new ArrayList<>();
-        threadsList.add(thread1);
-        threadsList.add(thread2);
-        threadsList.add(thread3);
-        threadsList.add(thread4);
+        threadsList.add(new CallableSocialThread("Поток-1"));
+        threadsList.add(new CallableSocialThread("Поток-2"));
+        threadsList.add(new CallableSocialThread("Поток-3"));
+        threadsList.add(new CallableSocialThread("Поток-4"));
+
         // invokeAll() возвращает лист фючеров, когда все Future.isDone() == true
         List<Future<String>> tasksList = threadPool.invokeAll(threadsList);
 
-        //Соберем все результаты в лист. Future.get() не заблокирует main,
+        //Соберем все результаты в лист. Future.get() не заблокирует main, (Заблокирует, тк мейн это другой поток, его ничто не держит упереться в get())
         // тк уже отработал ExecutorService.invokeAll()
         List<String> tasksResultList = tasksList.stream()
                 .map(task -> {
