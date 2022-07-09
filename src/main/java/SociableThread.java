@@ -3,7 +3,7 @@ public class SociableThread extends Thread {
     public SociableThread() {
     }
 
-    public SociableThread(ThreadGroup group, String name) {
+    public  SociableThread(ThreadGroup group, String name) {
         super(group, name);
     }
 
@@ -11,9 +11,9 @@ public class SociableThread extends Thread {
     public void run() {
         try {
             while (true) {
+                if (isInterrupted()) return;
                 sleep(3000);
                 System.out.printf("Hello i'm %s%n", getName());
-                if (isInterrupted()) return;
             }
         } catch (InterruptedException ex) {
 

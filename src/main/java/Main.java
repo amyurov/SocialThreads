@@ -4,16 +4,10 @@ public class Main {
         ThreadGroup socialThreadsGroup = new ThreadGroup("флудилка");
 
         // Создаем потоки:
-        SociableThread thread1 = new SociableThread(socialThreadsGroup, "Поток1");
-        SociableThread thread2 = new SociableThread(socialThreadsGroup, "Поток2");
-        SociableThread thread3 = new SociableThread(socialThreadsGroup, "Поток3");
-        SociableThread thread4 = new SociableThread(socialThreadsGroup, "Поток4");
-
-        // Порождаем потоки
-        thread1.start();
-        thread2.start();
-        thread3.start();
-        thread4.start();
+        new Thread(socialThreadsGroup, new SociableThread(), "Поток1").start();
+        new Thread(socialThreadsGroup, new SociableThread(), "Поток2").start();
+        new Thread(socialThreadsGroup, new SociableThread(), "Поток3").start();
+        new Thread(socialThreadsGroup, new SociableThread(), "Поток4").start();
 
         // Останавливаем поток main, чтобы порожденные потоки успели пообщаться
         Thread.sleep(15000);
